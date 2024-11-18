@@ -16,4 +16,4 @@
 
 # GrafanaLokiLogger
 
-**GrafanaLokiLogger** é uma biblioteca desenvolvida para integração com o [Loki](https://grafana.com/oss/loki/), da [Grafana Labs](https://grafana.com/), permitindo o envio eficiente de logs para sistemas de monitoramento e análise centralizada.
+**GrafanaLokiLogger** é uma biblioteca desenvolvida para integração com o [Loki](https://grafana.com/oss/loki/), da [Grafana Labs](https://grafana.com/), permitindo o envio eficiente de logs para monitoramento e análise centralizada.
