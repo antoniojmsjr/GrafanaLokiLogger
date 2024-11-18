@@ -21,8 +21,24 @@
 Implementada nas linguagens `Delphi` e `Lazarus`, utiliza o conceito de [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) para oferecer uma experiência intuitiva e eficiente aos desenvolvedores. Projetada com foco em praticidade, ela facilita a integração com **Loki**, permitindo o envio e a consulta de logs de forma simplificada e organizada. Ideal para projetos que demandam monitoramento centralizado e escalabilidade, a biblioteca combina flexibilidade e robustez, atendendo às necessidades de sistemas modernos com excelência.
 
 </br>
-</br>
 
 [![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) **GrafanaLokiLogger** is a library developed for integration with [Loki](https://grafana.com/oss/loki/), from [Grafana Labs](https://grafana.com/), enabling efficient log delivery for centralized monitoring and analysis.
 
 Implemented in `Delphi` and `Lazarus`, it uses the [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) concept to deliver an intuitive and efficient experience for developers. Designed with a focus on practicality, it simplifies integration with **Loki**, enabling streamlined log delivery and querying. Ideal for projects requiring centralized monitoring and scalability, the library combines flexibility and robustness, meeting the demands of modern systems with excellence.
+
+
+### Delphi/Lazarus
+
+[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi implementada para as linguagens Delphi e Lazarus, oferecendo suporte aos desenvolvedores dessas plataformas e facilitando a integração com o Loki de forma intuitiva e prática.
+
+</br>
+
+[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger has been implemented for Delphi and Lazarus, offering support to developers on these platforms and facilitating integration with Loki in an intuitive and practical way.
+
+</br>
+<p align="center">
+  <a href="https://github.com/antoniojmsjr/GrafanaLokiLogger/blob/main/Image/Loki.png">
+    <img alt="GrafanaLokiLogger" height="230" width="600" src="https://github.com/antoniojmsjr/GrafanaLokiLogger/blob/main/Image/Loki.png">
+  </a>
+</p>
+</br>
