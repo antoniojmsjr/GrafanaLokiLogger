@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Align = alBottom
+  Align = alClient
   Caption = 'GrafanaLokiLogger - App Desktop'
-  ClientHeight = 346
+  ClientHeight = 553
   ClientWidth = 1362
   Color = clWindow
   Font.Charset = DEFAULT_CHARSET
@@ -20,13 +20,13 @@ object frmMain: TfrmMain
     Left = 0
     Top = 0
     Width = 1362
-    Height = 346
+    Height = 553
     Align = alClient
     BevelOuter = bvNone
     Caption = 'pnlClient'
     ShowCaption = False
     TabOrder = 0
-    ExplicitHeight = 473
+    ExplicitHeight = 346
     object gbxLogs: TGroupBox
       AlignWithMargins = True
       Left = 3
@@ -559,22 +559,29 @@ object frmMain: TfrmMain
       end
     end
     object gbxErrors: TGroupBox
-      Left = 0
-      Top = 311
-      Width = 1362
-      Height = 346
-      Align = alTop
+      AlignWithMargins = True
+      Left = 3
+      Top = 314
+      Width = 1356
+      Height = 236
+      Align = alClient
       Caption = ' Errors '
       TabOrder = 1
+      ExplicitLeft = 0
+      ExplicitTop = 311
+      ExplicitWidth = 1362
+      ExplicitHeight = 346
       object mmoErros: TMemo
         Left = 2
         Top = 15
-        Width = 1358
-        Height = 329
+        Width = 1352
+        Height = 219
         Align = alClient
         BorderStyle = bsNone
         ScrollBars = ssVertical
         TabOrder = 0
+        ExplicitWidth = 1358
+        ExplicitHeight = 329
       end
     end
     object pnlHeader: TGridPanel
@@ -823,9 +830,10 @@ object frmMain: TfrmMain
         object imgLogo: TImage
           Left = 0
           Top = 0
-          Width = 422
+          Width = 362
           Height = 165
           Align = alClient
+          Center = True
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000002580000
             00780802000000A1371B94000000017352474200AECE1CE90000000467414D41
@@ -2478,11 +2486,12 @@ object frmMain: TfrmMain
             454E44AE426082}
           ExplicitLeft = -1
           ExplicitTop = -3
+          ExplicitWidth = 422
         end
         object pnlHeaderApp: TPanel
-          Left = 422
+          Left = 362
           Top = 0
-          Width = 230
+          Width = 290
           Height = 165
           Align = alRight
           BevelOuter = bvNone
@@ -2493,7 +2502,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 3
             Top = 23
-            Width = 224
+            Width = 284
             Height = 30
             Margins.Bottom = 0
             Align = alTop
@@ -2509,12 +2518,13 @@ object frmMain: TfrmMain
             ParentFont = False
             TabOrder = 0
             OnLinkClick = lblHeaderAppGithubLinkClick
+            ExplicitWidth = 224
           end
           object lblHeaderAppName: TLinkLabel
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 224
+            Width = 284
             Height = 17
             Margins.Bottom = 0
             Align = alTop
@@ -2532,7 +2542,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 3
             Top = 56
-            Width = 224
+            Width = 284
             Height = 17
             Margins.Bottom = 0
             Align = alTop
@@ -2550,7 +2560,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 3
             Top = 76
-            Width = 224
+            Width = 284
             Height = 17
             Margins.Bottom = 0
             Align = alTop
