@@ -53,13 +53,20 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 [![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) With the goal of simplifying log monitoring and querying using Loki, a practical and intuitive Dashboard was developed. This panel provides a user-friendly interface for log analysis and management. It can be accessed directly via the link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
 
-
 </br>
 <p align="center">
   <a href="https://github.com/user-attachments/assets/19da337e-8274-443d-addc-ce3c8c9834cb">
     <img alt="GrafanaLokiLogger Dashboard" height="550" width=100% src="https://github.com/user-attachments/assets/19da337e-8274-443d-addc-ce3c8c9834cb">
   </a>
 </p>
+</br>
+
+## ▶️ Demo
+
+[Demo](https://github.com/user-attachments/files/17824679/GrafanaLokiLogger.zip)
+
+https://github.com/user-attachments/assets/914c7024-53be-4b5c-8afd-68aca3582c2a
+
 </br>
 
 ## ⚠️ License
