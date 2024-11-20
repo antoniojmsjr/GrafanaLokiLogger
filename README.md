@@ -31,11 +31,11 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 ### Delphi/Lazarus
 
-[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi implementada para as linguagens Delphi e Lazarus, oferecendo suporte aos desenvolvedores dessas plataformas e facilitando a integração com o Loki de forma intuitiva e prática.
+[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi projetada para as linguagens `Delphi` e `Lazarus`, oferecendo suporte aos desenvolvedores dessas plataformas e simplificando a integração com o [Loki](https://grafana.com/oss/loki/) de maneira intuitiva e prática.
 
 </br>
 
-[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger has been implemented for Delphi and Lazarus, offering support to developers on these platforms and facilitating integration with Loki in an intuitive and practical way.
+[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger was designed for `Delphi` and `Lazarus`, providing support for developers on these platforms and simplifying integration with [Loki](https://grafana.com/oss/loki/) in an intuitive and practical way.
 
 </br>
 <p align="center">
