@@ -29,7 +29,7 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 </br>
 
-### Delphi/Lazarus
+### :flying_saucer: Delphi/Lazarus
 
 [![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi projetada para as linguagens `Delphi` e `Lazarus`, oferecendo suporte aos desenvolvedores dessas plataformas e simplificando a integração com o [Loki](https://grafana.com/oss/loki/) de maneira intuitiva e prática.
 
@@ -45,7 +45,7 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 </p>
 </br>
 
-### Dashboard
+### :bar_chart: Dashboard
 
 [![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) Com o objetivo de simplificar o monitoramento e a consulta de *logs* utilizando **Loki**, foi desenvolvido um Dashboard prático e intuitivo. Este painel oferece uma interface amigável para a análise e gestão de logs. Ele pode ser copiado diretamente através do link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
 
@@ -61,7 +61,7 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 </p>
 </br>
 
-## ▶️ Demo
+### :arrow_forward: Demo
 
 [Demo](https://github.com/user-attachments/files/17824679/GrafanaLokiLogger.zip)
 
@@ -69,5 +69,5 @@ https://github.com/user-attachments/assets/914c7024-53be-4b5c-8afd-68aca3582c2a
 
 </br>
 
-## ⚠️ License
+### :warning: License
 `GrafanaLokiLogger` is free and open-source software licensed under the [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/antoniojmsjr/GrafanaLokiLogger/blob/master/LICENSE)
