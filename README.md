@@ -16,7 +16,7 @@
 
 # GrafanaLokiLogger
 
-[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) **GrafanaLokiLogger** é uma biblioteca desenvolvida para integração com o [Loki](https://grafana.com/oss/loki/), da [Grafana Labs](https://grafana.com/), permitindo o envio de logs para monitoramento e análise centralizado.
+[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) **GrafanaLokiLogger** é uma biblioteca desenvolvida para integração com [Loki](https://grafana.com/oss/loki/), desenvolvida pela [Grafana Labs](https://grafana.com/), permitindo o envio de logs para monitoramento e análise centralizado.
 
 GrafanaLokiLogger utiliza o conceito de [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) para proporcionar uma experiência intuitiva e eficiente aos desenvolvedores. Projetada com foco na praticidade, facilita a integração com o **Loki**, permitindo o envio de logs de forma simplificada e organizada. Ideal para projetos que exigem monitoramento centralizado e escalabilidade, a biblioteca combina flexibilidade e robustez, atendendo às necessidades de sistemas modernos com excelência.
 
