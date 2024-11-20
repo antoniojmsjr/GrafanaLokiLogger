@@ -31,11 +31,11 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 ### :flying_saucer: Delphi/Lazarus
 
-[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi projetada para as linguagens `Delphi` e `Lazarus`, oferecendo suporte aos desenvolvedores dessas plataformas e simplificando a integração com o [Loki](https://grafana.com/oss/loki/) de maneira intuitiva e prática.
+[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi projetada para as linguagens `Delphi` e `Lazarus`, oferecendo suporte aos desenvolvedores e tornando a integração com [Loki](https://grafana.com/oss/loki/) mais intuitiva e prática.
 
 </br>
 
-[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger was designed for `Delphi` and `Lazarus`, providing support for developers on these platforms and simplifying integration with [Loki](https://grafana.com/oss/loki/) in an intuitive and practical way.
+[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger was designed for `Delphi` and `Lazarus`, providing support for developers and making integration with [Loki](https://grafana.com/oss/loki/) more intuitive and practical.
 
 </br>
 <p align="center">
@@ -47,7 +47,7 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 ### :bar_chart: Dashboard
 
-[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) Com o objetivo de simplificar o monitoramento e a consulta de *logs* utilizando **Loki**, foi desenvolvido um Dashboard prático e intuitivo. Este painel oferece uma interface amigável para a análise e gestão de logs. Ele pode ser copiado diretamente através do link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
+[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) Com o objetivo de simplificar o monitoramento e a consulta de *logs* utilizando [Loki](https://grafana.com/oss/loki/), foi desenvolvido um Dashboard prático e intuitivo. Este painel oferece uma interface amigável para a análise e gestão de *logs*. Ele pode ser copiado diretamente através do link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
 
 </br>
 
