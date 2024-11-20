@@ -61,3 +61,6 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
   </a>
 </p>
 </br>
+
+## ⚠️ License
+`GrafanaLokiLogger` is free and open-source software licensed under the [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/antoniojmsjr/GrafanaLokiLogger/blob/master/LICENSE)
