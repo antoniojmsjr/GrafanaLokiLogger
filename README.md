@@ -21,6 +21,8 @@
 GrafanaLokiLogger utiliza o conceito de [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface), proporcionando aos desenvolvedores uma experiência intuitiva no uso da biblioteca. Projetada com foco na praticidade, a solução simplifica a integração com o [Loki](https://grafana.com/oss/loki/) e permite o envio de *logs* de forma estruturada e direta. 
 Ideal para projetos que demandam monitoramento centralizado e escalabilidade, a solução combina flexibilidade e eficiência, atendendo às necessidades de sistemas modernos.
 
+Para mais informações sobre a biblioteca, como instalação, documentação e outros detalhes, consulte a [Wiki](https://github.com/antoniojmsjr/GrafanaLokiLogger/wiki).
+
 </br>
 
 [![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) **GrafanaLokiLogger** is a library designed for integration with [Loki](https://grafana.com/oss/loki/), developed by [Grafana Labs](https://grafana.com/), enabling *log* delivery for centralized monitoring and analysis. 
