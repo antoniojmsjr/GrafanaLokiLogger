@@ -50,11 +50,11 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 ### :bar_chart: Dashboard
 
-[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) Com o objetivo de simplificar o monitoramento e a consulta de *logs* utilizando [Loki](https://grafana.com/oss/loki/), foi desenvolvido um Dashboard prático e intuitivo. Este painel oferece uma interface amigável para a análise e gestão de *logs*. Ele pode ser copiado diretamente através do link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
+[![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) Com o objetivo de simplificar o monitoramento e a consulta de *logs* utilizando [Loki](https://grafana.com/oss/loki/), foi desenvolvido um Dashboard. Este painel oferece uma interface amigável para a análise e gestão de *logs*. Ele pode ser copiado diretamente através do link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
 
 </br>
 
-[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) With the goal of simplifying log monitoring and querying using Loki, a practical and intuitive Dashboard was developed. This panel provides a user-friendly interface for log analysis and management. It can be accessed directly via the link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
+[![Static Badge](https://img.shields.io/badge/English-(enUS)-D14836)](https://github.com/antoniojmsjr/GrafanaLokiLogger) With the goal of simplifying log monitoring and querying using Loki, a Dashboard was developed. This panel provides a user-friendly interface for log analysis and management. It can be accessed directly via the link: [GrafanaLokiLogger Dashboard](https://grafana.com/grafana/dashboards/22349-grafanalokilogger)
 
 </br>
 <p align="center">
