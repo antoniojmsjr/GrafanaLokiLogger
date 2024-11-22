@@ -63,6 +63,8 @@ implementation
 uses
   System.SysUtils, GrafanaLokiLogger.Consts, GrafanaLokiLogger.Types;
 
+{$I GrafanaLokiLogger.inc}
+
 {$REGION 'THTTPRequest'}
 constructor THTTPRequest.Create;
 begin
@@ -113,7 +115,7 @@ begin
   FHttpRequest.MethodString := 'POST';
   FHttpRequest.Client.ContentType := 'application/json';
   FHttpRequest.Client.Accept := '*/*';
-  FHttpRequest.Client.UserAgent := 'GrafanaLokiLogger';
+  FHttpRequest.Client.UserAgent := Format('GrafanaLokiLogger v%s', [GrafanaLokiLoggerVersion]);
   lHeaders := GetHeaders;
 
   // REQUEST

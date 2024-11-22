@@ -1,4 +1,4 @@
-{******************************************************************************}
+﻿{******************************************************************************}
 {                                                                              }
 {           GrafanaLokiLogger.HTTP.Lazarus.pas                                 }
 {                                                                              }
@@ -67,6 +67,8 @@ implementation
 uses
   SysUtils, ssockets, GrafanaLokiLogger.Consts, GrafanaLokiLogger.Types;
 
+{$I GrafanaLokiLogger.inc}
+
 {$REGION 'THTTPRequest'}
 constructor THTTPRequest.Create;
 begin
@@ -109,7 +111,7 @@ begin
   lURL := Format('%s%s', [lURL, C_LOKI_API_ENDPOINT_PUSH]);
   FFPHTTPClient.AddHeader('Accept', '*/*');
   FFPHTTPClient.AddHeader('Content-Type', 'application/json');
-  FFPHTTPClient.AddHeader('User-Agent', 'GrafanaLokiLogger');
+  FFPHTTPClient.AddHeader('User-Agent', Format('GrafanaLokiLogger v%s', [GrafanaLokiLoggerVersion]));
   SetHeaders;
 
   // REQUEST
