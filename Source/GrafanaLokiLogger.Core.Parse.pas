@@ -145,7 +145,7 @@ begin
       on E: Exception do
       begin
         lStreamsItems.Free;
-        raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.Validation)
+        raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.PayloadInvalid)
           .Title('Parse fail')
           .Msg(E.Message)
           .Hint('Failed to parse label values.');
@@ -163,7 +163,7 @@ begin
       on E: Exception do
       begin
         lStreamsItems.Free;
-        raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.Validation)
+        raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.PayloadInvalid)
           .Title('Parse fail. Logs')
           .Msg(E.Message)
           .Hint('Failed to parse log values.');
