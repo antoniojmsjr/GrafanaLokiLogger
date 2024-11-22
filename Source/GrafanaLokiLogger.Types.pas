@@ -47,6 +47,7 @@ type
   TGrafanaLokiLoggerException = (Unknown,
                                  Others,
                                  Validation,
+                                 PayloadInvalid,
                                  RequestHttp,
                                  RequestInvalid);
 
@@ -121,6 +122,7 @@ begin
     TGrafanaLokiLoggerException.Unknown: Result := 'Unknown';
     TGrafanaLokiLoggerException.Others: Result := 'Others';
     TGrafanaLokiLoggerException.Validation: Result := 'Validation';
+    TGrafanaLokiLoggerException.PayloadInvalid: Result := 'PayloadInvalid';
     TGrafanaLokiLoggerException.RequestHttp: Result := 'RequestHttp';
     TGrafanaLokiLoggerException.RequestInvalid: Result := 'RequestInvalid';
   end;

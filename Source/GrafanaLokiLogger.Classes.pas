@@ -245,7 +245,7 @@ begin
   lResult := TStringBuilder.Create;
   try
     lResult.AppendFormat('URL: %s', [FURL]).AppendLine;
-    lResult.AppendFormat('JSON: %s', [lJSON]);
+    //lResult.AppendFormat('JSON: %s', [lJSON]);
     Result := lResult.ToString;
   finally
     lResult.Free;
