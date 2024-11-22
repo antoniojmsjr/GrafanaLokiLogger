@@ -275,7 +275,7 @@ begin
   btnPushLogs.Font.Style := [fsBold];
   btnPushLogs.Font.Size := 12;
 
-  ExecuteInThread(PushLogExecute, PushLogExecuteTerminate);
+  TThread.ExecuteInThread(PushLogExecute, PushLogExecuteTerminate);
 end;
 
 procedure TfrmMain.AmountChange(Sender: TObject);

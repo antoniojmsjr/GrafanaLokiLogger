@@ -255,6 +255,7 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   Self.Caption := Format('GrafanaLokiLogger v%s', [TGrafanaLokiLogger.Build.Version]);
+  lblHeaderAppName.Caption := Format('GrafanaLokiLogger v%s', [TGrafanaLokiLogger.Build.Version]);
   SetTotal(GetAmount);
 end;
 
