@@ -263,7 +263,7 @@ begin
   TThread.Synchronize(nil, procedure
   begin
     mmoErros.Lines.Add(pMessage);
-    mmoErros.Lines.Add(StringOfChar('-', 500));
+    mmoErros.Lines.Add(StringOfChar('-', 350));
   end);
 end;
 
