@@ -26,7 +26,6 @@ object frmMain: TfrmMain
     Caption = 'pnlClient'
     ShowCaption = False
     TabOrder = 0
-    ExplicitHeight = 346
     object gbxLogs: TGroupBox
       AlignWithMargins = True
       Left = 3
@@ -567,10 +566,6 @@ object frmMain: TfrmMain
       Align = alClient
       Caption = ' Errors '
       TabOrder = 1
-      ExplicitLeft = 0
-      ExplicitTop = 311
-      ExplicitWidth = 1362
-      ExplicitHeight = 346
       object mmoErros: TMemo
         Left = 2
         Top = 15
@@ -580,8 +575,6 @@ object frmMain: TfrmMain
         BorderStyle = bsNone
         ScrollBars = ssVertical
         TabOrder = 0
-        ExplicitWidth = 1358
-        ExplicitHeight = 329
       end
     end
     object pnlHeader: TGridPanel
@@ -2518,7 +2511,6 @@ object frmMain: TfrmMain
             ParentFont = False
             TabOrder = 0
             OnLinkClick = lblHeaderAppGithubLinkClick
-            ExplicitWidth = 224
           end
           object lblHeaderAppName: TLinkLabel
             AlignWithMargins = True

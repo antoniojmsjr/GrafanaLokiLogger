@@ -167,7 +167,11 @@ begin
 
   // JSONObject
   if Assigned(FJSONObject) then
+    {$IF DEFINED(FPC)}
+    lJSONValue := Format('%s%s', [#32, FJSONObject.AsJSON]);
+    {$ELSE}
     lJSONValue := Format('%s%s', [#32, FJSONObject.ToString]);
+    {$ENDIF}
 
   Result := Format('%s%s%s', [lFieldValue, lTextValue, lJSONValue]);
 end;

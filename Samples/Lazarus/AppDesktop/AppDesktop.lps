@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="AppDesktop.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="28"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Source\main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Main"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="181"/>
+        <CursorPos Y="204"/>
+        <UsageCount Value="28"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Source\stat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmStat"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="Stat"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="11" Y="14"/>
+        <UsageCount Value="28"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\spin.pp"/>
+        <UnitName Value="Spin"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="156"/>
+        <CursorPos X="3" Y="169"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\forms.pp"/>
+        <UnitName Value="Forms"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1618"/>
+        <CursorPos X="14" Y="1629"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="Source\main.lfm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\classes\classesh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="1810"/>
+        <CursorPos X="72" Y="1815"/>
+        <UsageCount Value="12"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\unix\cthreads.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="421"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Source\GrafanaLokiLogger.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="22"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\lclintf.pas"/>
+        <UnitName Value="LCLIntf"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="53"/>
+        <CursorPos Y="68"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\include\lclintfh.inc"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Source\GrafanaLokiLogger.Core.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="43"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Source\GrafanaLokiLogger.inc"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\lcltype.pp"/>
+        <UnitName Value="LCLType"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="649"/>
+        <CursorPos X="13" Y="31"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Source\GrafanaLokiLogger.Core.Parse.pas"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="50"/>
+        <CursorPos X="39" Y="93"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Source\GrafanaLokiLogger.Core.Logs.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="201"/>
+        <CursorPos X="39" Y="222"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Source\GrafanaLokiLogger.HTTP.Lazarus.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="107"/>
+        <CursorPos X="71" Y="119"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\sysutilh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="26"/>
+        <CursorPos X="26" Y="39"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\rtl\objpas\sysutils\syshelph.inc"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="253"/>
+        <CursorPos X="11" Y="4"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\fpc\3.2.2\source\packages\rtl-generics\src\generics.collections.pas"/>
+        <UnitName Value="Generics.Collections"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="275"/>
+        <CursorPos X="3" Y="225"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="343" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="343" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="343" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="343" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="343" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="343" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="342" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="345" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="346" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="345" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="346" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="345" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="346" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="345" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="346" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="345" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="346" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="345" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="346" Column="54" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="333" TopLine="332"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="347" TopLine="334"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="348" TopLine="335"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="277" TopLine="260"/>
+      </Position>
+      <Position>
+        <Filename Value="Source\main.pas"/>
+        <Caret Line="209" Column="32" TopLine="190"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
