@@ -66,7 +66,7 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 ### :arrow_forward: Demo
 
-[Demo](https://github.com/user-attachments/files/17824679/GrafanaLokiLogger.zip)
+[Download](https://github.com/user-attachments/files/17877452/GrafanaLokiLogger.zip)
 
 https://github.com/user-attachments/assets/914c7024-53be-4b5c-8afd-68aca3582c2a
 
