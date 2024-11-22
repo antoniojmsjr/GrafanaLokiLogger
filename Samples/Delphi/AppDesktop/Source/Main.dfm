@@ -1,7 +1,6 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Align = alClient
   Caption = 'GrafanaLokiLogger - App Desktop'
   ClientHeight = 553
   ClientWidth = 1362
@@ -13,6 +12,7 @@ object frmMain: TfrmMain
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -823,7 +823,7 @@ object frmMain: TfrmMain
         object imgLogo: TImage
           Left = 0
           Top = 0
-          Width = 362
+          Width = 372
           Height = 165
           Align = alClient
           Center = True
@@ -2482,9 +2482,9 @@ object frmMain: TfrmMain
           ExplicitWidth = 422
         end
         object pnlHeaderApp: TPanel
-          Left = 362
+          Left = 372
           Top = 0
-          Width = 290
+          Width = 280
           Height = 165
           Align = alRight
           BevelOuter = bvNone
@@ -2495,7 +2495,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 3
             Top = 23
-            Width = 284
+            Width = 274
             Height = 30
             Margins.Bottom = 0
             Align = alTop
@@ -2511,12 +2511,13 @@ object frmMain: TfrmMain
             ParentFont = False
             TabOrder = 0
             OnLinkClick = lblHeaderAppGithubLinkClick
+            ExplicitWidth = 284
           end
           object lblHeaderAppName: TLinkLabel
             AlignWithMargins = True
             Left = 3
             Top = 3
-            Width = 284
+            Width = 274
             Height = 17
             Margins.Bottom = 0
             Align = alTop
@@ -2534,7 +2535,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 3
             Top = 56
-            Width = 284
+            Width = 274
             Height = 17
             Margins.Bottom = 0
             Align = alTop
@@ -2552,7 +2553,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 3
             Top = 76
-            Width = 284
+            Width = 274
             Height = 17
             Margins.Bottom = 0
             Align = alTop

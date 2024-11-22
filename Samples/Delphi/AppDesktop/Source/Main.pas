@@ -87,14 +87,13 @@ uses
   System.JSON, System.Threading, Winapi.ShellAPI, GrafanaLokiLogger.Types;
 
 {$R *.dfm}
-{$I GrafanaLokiLogger.inc}
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   SetTotal(GetAmount);
 
-  Self.Caption := Format('GrafanaLokiLogger v%s', [GrafanaLokiLoggerVersion]);
-  lblHeaderAppName.Caption := Format('GrafanaLokiLogger v%s', [GrafanaLokiLoggerVersion]);
+  Self.Caption := Format('GrafanaLokiLogger v%s', [TGrafanaLokiLogger.Build.Version]);
+  lblHeaderAppName.Caption := Format('GrafanaLokiLogger v%s', [TGrafanaLokiLogger.Build.Version]);
   lblHeaderAppGithub.Caption :=
     '<a href="https://github.com/antoniojmsjr/GrafanaLokiLogger">https://github.com/antoniojmsjr/GrafanaLokiLogger</a>';
   lblHeaderGrafanaLabsSite.Caption :=
@@ -272,6 +271,8 @@ procedure TfrmMain.PushLog(const pLevel: TGrafanaLokiLoggerLevel; const pRecord:
 var
   lJSONObj: TJSONObject;
 begin
+  TThread.Sleep(5);
+
   lJSONObj := TJSONObject.Create;
   lJSONObj.AddPair(TJSONPair.Create('Lib', 'GrafanaLokiLogger'));
   lJSONObj.AddPair(TJSONPair.Create('Version', TGrafanaLokiLogger.Build.Version));
@@ -310,7 +311,6 @@ begin
         LogError(Format('Level: %s - Error: %s - %s', [pLevel.AsString, E.Message, E.QualifiedClassName]));
     end;
   end;
-  TThread.Sleep(10);
 end;
 
 end.
