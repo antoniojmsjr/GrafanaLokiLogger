@@ -1,0 +1,9 @@
+{
+	"name": "GrafanaLokiLogger",
+	"description": "GrafanaLokiLogger is a library designed for integration with Loki, enabling log delivery for centralized monitoring and analysis.",
+	"version": "1.0.0",
+	"homepage": "https://github.com/antoniojmsjr/GrafanaLokiLogger",
+	"mainsrc": "Source",
+	"projects": [],
+	"dependencies": {}
+}
