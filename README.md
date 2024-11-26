@@ -35,7 +35,7 @@ GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Flue
 
 </br>
 
-### :flying_saucer: Delphi/Lazarus
+### :flying_saucer: Compatibility
 
 [![Static Badge](https://img.shields.io/badge/Portugu%C3%AAs-(ptBR)-07C160)](https://github.com/antoniojmsjr/GrafanaLokiLogger) GrafanaLokiLogger foi projetada para as linguagens `Delphi` e `Lazarus`, oferecendo suporte aos desenvolvedores e tornando a integração com [Loki](https://grafana.com/oss/loki/) mais intuitiva e prática.
 
