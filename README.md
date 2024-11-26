@@ -30,6 +30,9 @@ Ideal para projetos que demandam monitoramento centralizado e escalabilidade, a 
 
 GrafanaLokiLogger uses the [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) concept to provide an intuitive and efficient experience for developers. Designed with a focus on practicality, the solution simplifies integration with [Loki](https://grafana.com/oss/loki/) and enables structured and straightforward *log* delivery. Ideal for projects requiring centralized monitoring and scalability, the solution combines flexibility and efficiency to meet the needs of modern systems.
 
+> [!NOTE]
+> For more information about the library, including installation, documentation, and other details, please refer to the [Wiki](https://github.com/antoniojmsjr/GrafanaLokiLogger/wiki).
+
 </br>
 
 ### :flying_saucer: Delphi/Lazarus
