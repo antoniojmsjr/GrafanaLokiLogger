@@ -133,6 +133,13 @@ uses
 constructor TGrafanaLokiLoggerSettingsProxy.Create(pParent: IGrafanaLokiLoggerSettings);
 begin
   FGrafanaLokiLoggerSettings := pParent;
+  {$IF DEFINED(FPC)}
+  FGrafanaLokiLoggerSettings._Release;
+  {$ELSE}
+  {$IF COMPILERVERSION <= 30.0} //Delphi 10 Seattle / C++Builder 10 Seattle
+  FGrafanaLokiLoggerSettings._Release;
+  {$ENDIF}
+  {$ENDIF}
 end;
 
 function TGrafanaLokiLoggerSettingsProxy.&End: IGrafanaLokiLoggerSettings;
@@ -197,6 +204,13 @@ end;
 constructor TGrafanaLokiLoggerSettingsAuth.Create(pParent: IGrafanaLokiLoggerSettings);
 begin
   FGrafanaLokiLoggerSettings := pParent;
+  {$IF DEFINED(FPC)}
+  FGrafanaLokiLoggerSettings._Release;
+  {$ELSE}
+  {$IF COMPILERVERSION <= 30.0} //Delphi 10 Seattle / C++Builder 10 Seattle
+  FGrafanaLokiLoggerSettings._Release;
+  {$ENDIF}
+  {$ENDIF}
 end;
 
 function TGrafanaLokiLoggerSettingsAuth.Clear: IGrafanaLokiLoggerSettingsAuth;
@@ -233,9 +247,15 @@ end;
 constructor TGrafanaLokiLoggerSettings.Create(pParent: IGrafanaLokiLogger);
 begin
   FGrafanaLokiLogger := pParent;
+  {$IF DEFINED(FPC)}
+  FGrafanaLokiLogger._Release;
+  {$ELSE}
+  {$IF COMPILERVERSION <= 30.0} //Delphi 10 Seattle / C++Builder 10 Seattle
+  FGrafanaLokiLogger._Release;
+  {$ENDIF}
+  {$ENDIF}
   FProxy := TGrafanaLokiLoggerSettingsProxy.Create(Self);
   FAuthentication := TGrafanaLokiLoggerSettingsAuth.Create(Self);
-
   Reset;
 end;
 

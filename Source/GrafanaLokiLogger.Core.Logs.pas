@@ -104,8 +104,12 @@ constructor TGrafanaLokiLoggerLog.Create(pParent: IGrafanaLokiLoggerLogs);
 begin
   FGrafanaLokiLoggerLogs := pParent;
   {$IF DEFINED(FPC)}
+  FGrafanaLokiLoggerLogs._Release;
   FFields := TDictionary<string, string>.Create(256);
   {$ELSE}
+  {$IF COMPILERVERSION <= 30.0} //Delphi 10 Seattle / C++Builder 10 Seattle
+  FGrafanaLokiLoggerLogs._Release;
+  {$ENDIF}
   FFields := TDictionary<string, string>.Create(256, TIStringComparer.Ordinal); // CASE INSENSITIVE
   {$ENDIF}
 end;
@@ -186,6 +190,13 @@ end;
 constructor TGrafanaLokiLoggerLogs.Create(pParent: IGrafanaLokiLogger);
 begin
   FGrafanaLokiLogger := pParent;
+  {$IF DEFINED(FPC)}
+  FGrafanaLokiLogger._Release;
+  {$ELSE}
+  {$IF COMPILERVERSION <= 30.0} //Delphi 10 Seattle / C++Builder 10 Seattle
+  FGrafanaLokiLogger._Release;
+  {$ENDIF}
+  {$ENDIF}
   FLogs := TList<TPairLog>.Create;
 end;
 

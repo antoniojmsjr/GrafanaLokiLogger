@@ -75,10 +75,12 @@ begin
   FHttpRequest.Client := FHttpClient;
 
   FHttpClient.HandleRedirects := False;
+  {$IF COMPILERVERSION >= 32.0}
   FHttpClient.SecureProtocols := [];
   FHttpClient.SecureProtocols := [THTTPSecureProtocol.TLS1,
                                   THTTPSecureProtocol.TLS11,
                                   THTTPSecureProtocol.TLS12];
+  {$ENDIF}
 end;
 
 destructor THTTPRequest.Destroy;
@@ -96,9 +98,10 @@ var
   lURL: string;
 begin
   // PARAMS
+  {$IF COMPILERVERSION >= 31.0}
   FHttpRequest.ConnectionTimeout := Timeout;
   FHttpRequest.ResponseTimeout := Timeout;
-
+  {$ENDIF}
   if ((Proxy.Server <> EmptyStr) and (Proxy.Port > 0)) then
     FHttpRequest.Client.ProxySettings :=
       TProxySettings.Create(Proxy.Server,

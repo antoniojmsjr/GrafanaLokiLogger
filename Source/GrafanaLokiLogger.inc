@@ -23,4 +23,4 @@
 {                                                                              }
 {******************************************************************************}
 const
-  GrafanaLokiLoggerVersion = '1.0.0';
+  GrafanaLokiLoggerVersion = '1.1.0';

@@ -76,8 +76,12 @@ constructor TGrafanaLokiLoggerLabels.Create(pParent: IGrafanaLokiLogger);
 begin
   FGrafanaLokiLogger := pParent;
   {$IF DEFINED(FPC)}
+  FGrafanaLokiLogger._Release;
   FLabels := TDictionary<string, string>.Create(256);
   {$ELSE}
+  {$IF COMPILERVERSION <= 30.0} //Delphi 10 Seattle / C++Builder 10 Seattle
+  FGrafanaLokiLogger._Release;
+  {$ENDIF}
   FLabels := TDictionary<string, string>.Create(256, TIStringComparer.Ordinal); // CASE INSENSITIVE
   {$ENDIF}
 end;
