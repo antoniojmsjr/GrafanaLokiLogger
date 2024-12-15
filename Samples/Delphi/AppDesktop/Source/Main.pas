@@ -61,6 +61,7 @@ type
     edtSettingsBasicAuthUser: TEdit;
     lblSettingsBasicAuthPassword: TLabel;
     edtSettingsBasicAuthPassword: TEdit;
+    btnBuildinfo: TBitBtn;
     procedure AmountChange(Sender: TObject);
     procedure btnPushLogsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -68,6 +69,7 @@ type
       LinkType: TSysLinkType);
     procedure lblHeaderGrafanaLabsSiteLinkClick(Sender: TObject;
       const Link: string; LinkType: TSysLinkType);
+    procedure btnBuildinfoClick(Sender: TObject);
   private
     { Private declarations }
     procedure SetTotal(const pValue: Integer);
@@ -103,6 +105,35 @@ end;
 procedure TfrmMain.AmountChange(Sender: TObject);
 begin
   SetTotal(GetAmount);
+end;
+
+procedure TfrmMain.btnBuildinfoClick(Sender: TObject);
+var
+  lBuildinfo: IGrafanaLokiLoggerBuildinfo;
+begin
+  try
+    lBuildinfo := TGrafanaLokiLogger.Build
+      .Settings
+        .Reset
+        .URL(edtSettingsURL.Text)
+        .Timeout(edtSettingsTimeout.Value)
+        .Compression(ckbSettingsCompression.Checked)
+        .Authentication
+          .Basic(edtSettingsBasicAuthUser.Text, edtSettingsBasicAuthPassword.Text)
+      .&End
+      .Buildinfo;
+
+    if Assigned(lBuildinfo) then
+      Application.MessageBox(PWideChar(lBuildinfo.ToString), 'I N F O', MB_OK + MB_ICONINFORMATION);
+  except
+    on E: Exception do
+    begin
+      if E is EGrafanaLokiLogger then
+        Application.MessageBox(PWideChar(Format('%s', [EGrafanaLokiLogger(E).ToString])), 'E R R O R', MB_OK + MB_ICONERROR)
+      else
+        Application.MessageBox(PWideChar(Format('Error: %s - %s', [E.Message, E.QualifiedClassName])), 'E R R O R', MB_OK + MB_ICONERROR)
+    end;
+  end;
 end;
 
 procedure TfrmMain.btnPushLogsClick(Sender: TObject);
@@ -223,7 +254,7 @@ begin
       pnlHeader.Enabled := True;
       pnlLogs.Enabled := True;
       btnPushLogs.Caption := 'Push Logs';
-      btnPushLogs.Font.Style := [];
+      btnPushLogs.Font.Style := [fsBold];
       btnPushLogs.Font.Size := 8;
     end);
 
@@ -306,7 +337,7 @@ begin
     on E: Exception do
     begin
       if E is EGrafanaLokiLogger then
-        LogError(Format('Level: %s - Error: %s - %s', [pLevel.AsString, EGrafanaLokiLogger(E).ToString, E.QualifiedClassName]))
+        LogError(Format('%s', [EGrafanaLokiLogger(E).ToString]))
       else
         LogError(Format('Level: %s - Error: %s - %s', [pLevel.AsString, E.Message, E.QualifiedClassName]));
     end;

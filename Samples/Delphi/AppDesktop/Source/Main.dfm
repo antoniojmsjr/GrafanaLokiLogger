@@ -541,7 +541,7 @@ object frmMain: TfrmMain
             AlignWithMargins = True
             Left = 8
             Top = 3
-            Width = 141
+            Width = 65
             Height = 114
             Align = alClient
             Caption = 'Push Logs'
@@ -553,6 +553,23 @@ object frmMain: TfrmMain
             ParentFont = False
             TabOrder = 0
             OnClick = btnPushLogsClick
+          end
+          object btnBuildinfo: TBitBtn
+            AlignWithMargins = True
+            Left = 79
+            Top = 3
+            Width = 70
+            Height = 114
+            Align = alRight
+            Caption = 'Buildinfo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+            OnClick = btnBuildinfoClick
           end
         end
       end
@@ -2511,7 +2528,6 @@ object frmMain: TfrmMain
             ParentFont = False
             TabOrder = 0
             OnLinkClick = lblHeaderAppGithubLinkClick
-            ExplicitWidth = 284
           end
           object lblHeaderAppName: TLinkLabel
             AlignWithMargins = True
