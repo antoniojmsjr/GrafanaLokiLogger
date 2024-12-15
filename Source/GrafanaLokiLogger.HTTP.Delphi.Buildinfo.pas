@@ -1,6 +1,6 @@
 {******************************************************************************}
 {                                                                              }
-{           GrafanaLokiLogger.HTTP.Delphi.pas                                  }
+{           GrafanaLokiLogger.HTTP.Delphi.Buildinfo.pas                        }
 {                                                                              }
 {           Copyright (C) Antônio José Medeiros Schneider Júnior               }
 {                                                                              }
@@ -22,20 +22,22 @@
 {  limitations under the License.                                              }
 {                                                                              }
 {******************************************************************************}
-unit GrafanaLokiLogger.HTTP.Delphi;
+unit GrafanaLokiLogger.HTTP.Delphi.Buildinfo;
 
 interface
 
 uses
   System.Net.URLClient, System.Classes, System.Net.HttpClient, System.Net.HttpClientComponent,
-  System.Generics.Collections, GrafanaLokiLogger.Classes;
+  System.Generics.Collections, GrafanaLokiLogger.Classes,
+  GrafanaLokiLogger.Interfaces;
 
 type
-  THTTPRequest = class(THTTPRequestCustom)
-  private
+  THTTPRequestBuildinfo = class(THTTPRequestCustom)
+  strict private
     { private declarations }
     FHttpRequest: TNetHTTPRequest;
     FHttpClient: TNetHTTPClient;
+    FBuildinfo: IGrafanaLokiLoggerBuildinfo;
     function GetHeaders: TNetHeaders;
   protected
     { protected declarations }
@@ -44,9 +46,10 @@ type
     constructor Create;  override;
     destructor Destroy; override;
     procedure Execute; override;
+    property Buildinfo: IGrafanaLokiLoggerBuildinfo read FBuildinfo;
   end;
 
-  THTTPResponse = class(THTTPResponseCustom)
+  THTTPResponseBuildinfo = class(THTTPResponseBuildinfoCustom)
   private
     { private declarations }
     FHTTPResponse: IHTTPResponse;
@@ -54,19 +57,20 @@ type
     { protected declarations }
   public
     { public declarations }
-    constructor Create(pHTTPResponse: IHTTPResponse; const pURL: string; const pBody: string);
+    constructor Create(pHTTPResponse: IHTTPResponse; const pURL: string); reintroduce;
     procedure Process; override;
   end;
 
 implementation
 
 uses
-  System.SysUtils, GrafanaLokiLogger.Consts, GrafanaLokiLogger.Types;
+  System.SysUtils, GrafanaLokiLogger.Consts, GrafanaLokiLogger.Types,
+  GrafanaLokiLogger.Core.Buildinfo;
 
 {$I GrafanaLokiLogger.inc}
 
-{$REGION 'THTTPRequest'}
-constructor THTTPRequest.Create;
+{$REGION 'THTTPRequestBuildinfo'}
+constructor THTTPRequestBuildinfo.Create;
 begin
   inherited Create;
 
@@ -83,19 +87,18 @@ begin
   {$ENDIF}
 end;
 
-destructor THTTPRequest.Destroy;
+destructor THTTPRequestBuildinfo.Destroy;
 begin
   FHttpRequest.Free;
   inherited Destroy;
 end;
 
-procedure THTTPRequest.Execute;
+procedure THTTPRequestBuildinfo.Execute;
 var
   lResponse: IHTTPResponse;
   lHeaders: TNetHeaders;
   lExceptionKind: TGrafanaLokiLoggerException;
-  lHTTPResponse: THTTPResponse;
-  lURL: string;
+  lHTTPResponse: THTTPResponseBuildinfo;
 begin
   // PARAMS
   {$IF COMPILERVERSION >= 31.0}
@@ -110,22 +113,14 @@ begin
                             Proxy.Password,
                             EmptyStr);
 
-  if not URL.EndsWith('/') then
-    lURL := Format('%s/', [URL]);
-
-  lURL := Format('%s%s', [lURL, C_LOKI_API_ENDPOINT_PUSH]);
-  FHttpRequest.URL := lURL;
-  FHttpRequest.MethodString := 'POST';
-  FHttpRequest.Client.ContentType := 'application/json';
+  FHttpRequest.URL := Self.URL;
+  FHttpRequest.MethodString := 'GET';
   FHttpRequest.Client.Accept := '*/*';
   FHttpRequest.Client.UserAgent := Format('GrafanaLokiLogger v%s', [GrafanaLokiLoggerVersion]);
   lHeaders := GetHeaders;
 
   // REQUEST
   try
-    Body.Position := 0;
-    FHttpRequest.SourceStream := Body;
-
     lResponse := FHttpRequest.Execute(lHeaders);
   except
     on E: Exception do
@@ -135,7 +130,7 @@ begin
         lExceptionKind := TGrafanaLokiLoggerException.RequestHttp;
 
       raise EGrafanaLokiLogger.Build(lExceptionKind)
-        .Title('Request Execute fail')
+        .Title('Request fail')
         .Msg(E.Message)
         .Hint('Check the error message.')
         .Detail(GetDetail(E));
@@ -143,15 +138,16 @@ begin
   end;
 
   // VALIDATION
-  lHTTPResponse := THTTPResponse.Create(lResponse, lURL, Self.BodyJSON);
+  lHTTPResponse := THTTPResponseBuildinfo.Create(lResponse, Self.URL);
   try
     lHTTPResponse.Process;
+    FBuildinfo := lHTTPResponse.Buildinfo;
   finally
     lHTTPResponse.Free;
   end;
 end;
 
-function THTTPRequest.GetHeaders: TNetHeaders;
+function THTTPRequestBuildinfo.GetHeaders: TNetHeaders;
 var
   lHeader: TPair<string, string>;
 begin
@@ -167,24 +163,46 @@ begin
 end;
 {$ENDREGION}
 
-{$REGION 'THTTPResponse'}
-constructor THTTPResponse.Create(pHTTPResponse: IHTTPResponse; const pURL: string; const pBody: string);
+{$REGION 'THTTPResponseBuildinfo'}
+constructor THTTPResponseBuildinfo.Create(pHTTPResponse: IHTTPResponse; const pURL: string);
 begin
-  inherited Create(pURL, pBody);
-  FHTTPResponse := pHTTPResponse
+  FHTTPResponse := pHTTPResponse;
+  FURL := pURL;
 end;
 
-procedure THTTPResponse.Process;
-var
-  lContent: string;
+procedure THTTPResponseBuildinfo.Process;
 begin
   if not Assigned(FHTTPResponse) then
     Exit;
 
-  if (FHTTPResponse.StatusCode = 400) then
+  FStatusCode := FHTTPResponse.StatusCode;
+  FStatusText := FHTTPResponse.StatusText;
+  FContent := FHTTPResponse.ContentAsString(TEncoding.UTF8);
+
+  case FHTTPResponse.StatusCode of
+    200:
+    begin
+      if (Trim(FContent) = EmptyStr) then
+        raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
+          .Title('Response processing')
+          .Msg('Response is empty.')
+          .Hint('Check the error message.')
+          .Detail(EmptyStr);
+
+      FBuildinfo := TGrafanaLokiLoggerBuildinfo.Create(FContent);
+    end;
+    404:
+    begin
+      raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
+        .Title('Request fail')
+        .Msg('Server does not support this request.')
+        .Hint('Check the error message.')
+        .Detail(EmptyStr);
+    end;
+  else
   begin
-    lContent := FHTTPResponse.ContentAsString(TEncoding.UTF8);
-    RequestInvalid(lContent);
+    inherited;
+  end;
   end;
 end;
 {$ENDREGION}

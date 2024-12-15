@@ -113,16 +113,33 @@ type
   THTTPResponseCustom = class abstract
   private
     { private declarations }
-    FURL: string;
-    FBody: string;
   protected
     { protected declarations }
-    function GetDetail: string; overload; virtual;
-    procedure RequestInvalid(const pContent: string);
+    FURL: string;
+    FContent: string;
+    FStatusCode: Integer;
+    FStatusText: string;
+    function GetDetail: string;
   public
     { public declarations }
-    constructor Create(const pURL: string; const pBody: string); reintroduce;
-    procedure Process; virtual; abstract;
+    procedure Process; virtual;
+    property URL: string read FURL;
+    property Content: string read FContent;
+    property StatusCode: Integer read FStatusCode;
+    property StatusText: string read FStatusText;
+  end;
+
+  THTTPResponsePushCustom = class(THTTPResponseCustom);
+
+  THTTPResponseBuildinfoCustom = class(THTTPResponseCustom)
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+    FBuildinfo: IGrafanaLokiLoggerBuildinfo;
+  public
+    { public declarations }
+    property Buildinfo: IGrafanaLokiLoggerBuildinfo read FBuildinfo;
   end;
 
   TParseStreamsCustom = class abstract
@@ -234,18 +251,12 @@ end;
 function THTTPRequestCustom.GetDetail: string;
 var
   lResult: TStringBuilder;
-  lJSON: string;
 begin
   Result := EmptyStr;
 
-  lJSON := 'Empty';
-  if (Trim(FBodyJSON) <> EmptyStr) then
-    lJSON := FBodyJSON;
-
   lResult := TStringBuilder.Create;
   try
-    lResult.AppendFormat('URL: %s', [FURL]).AppendLine;
-    //lResult.AppendFormat('JSON: %s', [lJSON]);
+    lResult.AppendFormat('URL: %s', [FURL]);
     Result := lResult.ToString;
   finally
     lResult.Free;
@@ -271,7 +282,7 @@ end;
 
 procedure THTTPRequestCustom.SetBodyJSON(const Value: string);
 begin
-  FBodyJSON := Value;
+  FBodyJSON := Trim(Value);
 end;
 
 procedure THTTPRequestCustom.SetCompression(const Value: Boolean);
@@ -291,63 +302,96 @@ end;
 
 procedure THTTPRequestCustom.SetURL(const Value: string);
 begin
-  FURL := Value;
+  FURL := Trim(Value);
 end;
 {$ENDREGION}
 
 {$REGION 'THTTPResponseCustom'}
-constructor THTTPResponseCustom.Create(const pURL: string; const pBody: string);
-begin
-  FURL := pURL;
-  FBody := pBody;
-end;
-
 function THTTPResponseCustom.GetDetail: string;
 var
   lResult: TStringBuilder;
-  lJSON: string;
 begin
   Result := EmptyStr;
-
-  lJSON := 'Empty';
-  if (Trim(FBody) <> EmptyStr) then
-    lJSON := FBody;
 
   lResult := TStringBuilder.Create;
   try
     lResult.AppendFormat('URL: %s', [FURL]).AppendLine;
-    lResult.AppendFormat('JSON: %s', [FBody]);
+    lResult.AppendFormat('Status code: %d - %s', [FStatusCode, FStatusText]);
     Result := lResult.ToString;
   finally
     lResult.Free;
   end;
 end;
 
-procedure THTTPResponseCustom.RequestInvalid(const pContent: string);
+procedure THTTPResponseCustom.Process;
 var
+  lMsg: string;
   lHint: string;
+  lRaiseValidation: Boolean;
 begin
-  if (Trim(pContent) = EmptyStr) then
-    Exit;
+  lRaiseValidation := False;
+  case FStatusCode of
+    400:
+    begin
+      lRaiseValidation := True;
+      if (Pos('EOF', FContent) > 0) then
+      begin
+        lMsg := 'Body is empty.';
+        lHint := 'It is necessary to inform the "Body" in the request.';
+      end
+      else
+        if (Pos('no media type', FContent) > 0) then
+        begin
+          lMsg := 'Content-Type is empty.';
+          lHint := 'Enter a valid Content-Type.';
+        end
+        else
+        begin
+          lMsg := FContent;
+          lHint := 'Check the message.';
+        end;
+    end;
+    401:
+    begin
+      lRaiseValidation := True;
+      if (Pos('no credentials provided', FContent) > 0) then
+      begin
+        lMsg := 'Credential not provided.';
+        lHint := 'Enter the API access credentials.';
+      end
+      else
+        if (Pos('invalid authentication credentials', FContent) > 0) then
+        begin
+          lMsg := 'Invalid authentication.';
+          lHint := 'Check access credentials.';
+        end
+        else
+          if (Pos('invalid token', FContent) > 0) then
+          begin
+            lMsg := 'The token provided is invalid!';
+            lHint := 'Enter a valid token.';
+          end
+          else
+            if (Pos('legacy auth cannot be upgraded because the host is not found', FContent) > 0) then
+            begin
+              lMsg := 'The token provided is invalid!';
+              lHint := 'Generate a specific token for this type of authentication.';
+            end
+            else
+            begin
+              lMsg := FContent;
+              lHint := 'Check the message.';
+            end;
+    end;
+  end;
 
-  if (Pos('EOF', pContent) > 0) then
-  begin
-    lHint := 'It is necessary to inform the "Body" in the request.';
-
+  if lRaiseValidation then
     raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
-      .Title('Request Execute fail')
-      .Msg(pContent)
+      .Title('Request fail')
+      .Msg(lMsg)
       .Hint(lHint)
       .Detail(GetDetail);
-  end
-  else
-    raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
-      .Title('Request Execute fail')
-      .Msg(pContent)
-      .Hint('Check the error message.')
-      .Detail(GetDetail);
 end;
-
 {$ENDREGION}
 
 {$REGION 'EGrafanaLokiLogger'}

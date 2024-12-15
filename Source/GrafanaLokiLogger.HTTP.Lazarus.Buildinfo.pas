@@ -1,6 +1,6 @@
-﻿{******************************************************************************}
+{******************************************************************************}
 {                                                                              }
-{           GrafanaLokiLogger.HTTP.Lazarus.pas                                 }
+{           GrafanaLokiLogger.HTTP.Lazarus.Buildinfo.pas                       }
 {                                                                              }
 {           Copyright (C) Antônio José Medeiros Schneider Júnior               }
 {                                                                              }
@@ -22,7 +22,7 @@
 {  limitations under the License.                                              }
 {                                                                              }
 {******************************************************************************}
-unit GrafanaLokiLogger.HTTP.Lazarus;
+unit GrafanaLokiLogger.HTTP.Lazarus.Buildinfo;
 
 {$IF DEFINED(FPC)}
   {$MODE DELPHI}{$H+}
@@ -32,13 +32,17 @@ interface
 
 uses
   Classes, Generics.Collections, FPHTTPClient, openssl, opensslsockets,
-  GrafanaLokiLogger.Classes;
+  GrafanaLokiLogger.Classes, GrafanaLokiLogger.Interfaces;
 
 type
-  THTTPRequest = class(THTTPRequestCustom)
+
+  { THTTPRequestBuildinfo }
+
+  THTTPRequestBuildinfo = class(THTTPRequestCustom)
   private
     { private declarations }
     FFPHTTPClient: TFPHTTPClient;
+    FBuildinfo: IGrafanaLokiLoggerBuildinfo;
     procedure SetHeaders;
   protected
     { protected declarations }
@@ -47,30 +51,32 @@ type
     constructor Create;  override;
     destructor Destroy; override;
     procedure Execute; override;
+    property Buildinfo: IGrafanaLokiLoggerBuildinfo read FBuildinfo;
   end;
 
-  THTTPResponse = class(THTTPResponseCustom)
+  { THTTPResponseBuildinfo }
+
+  THTTPResponseBuildinfo = class(THTTPResponseBuildinfoCustom)
   private
     { private declarations }
-    FStatusCode: Integer;
-    FContent: string;
+    FFPHTTPClient: TFPHTTPClient;
   protected
     { protected declarations }
   public
     { public declarations }
-    constructor Create(const pContent: string; const pStatusCode: Integer; const pURL: string; const pBody: string);
+    constructor Create(const pFPHTTPClient: TFPHTTPClient; const pContent: string; const pURL: string); reintroduce;
     procedure Process; override;
   end;
 
 implementation
 
 uses
-  SysUtils, ssockets, GrafanaLokiLogger.Consts, GrafanaLokiLogger.Types;
+  SysUtils, ssockets, GrafanaLokiLogger.Types, GrafanaLokiLogger.Core.Buildinfo;
 
 {$I GrafanaLokiLogger.inc}
 
-{$REGION 'THTTPRequest'}
-constructor THTTPRequest.Create;
+{$REGION 'THTTPRequestBuildinfo'}
+constructor THTTPRequestBuildinfo.Create;
 begin
   inherited Create;
 
@@ -80,18 +86,17 @@ begin
   FFPHTTPClient.ResponseHeaders.Clear;
 end;
 
-destructor THTTPRequest.Destroy;
+destructor THTTPRequestBuildinfo.Destroy;
 begin
   FFPHTTPClient.Free;
   inherited Destroy;
 end;
 
-procedure THTTPRequest.Execute;
+procedure THTTPRequestBuildinfo.Execute;
 var
-  lHTTPResponse: THTTPResponse;
+  lHTTPResponse: THTTPResponseBuildinfo;
   lExceptionKind: TGrafanaLokiLoggerException;
   lContent: string;
-  lURL: string;
 begin
   // PARAMS
   FFPHTTPClient.ConnectTimeout := Timeout;
@@ -105,20 +110,13 @@ begin
     FFPHTTPClient.Proxy.UserName := Proxy.User;
   end;
 
-  if not URL.EndsWith('/') then
-    lURL := Format('%s/', [URL]);
-
-  lURL := Format('%s%s', [lURL, C_LOKI_API_ENDPOINT_PUSH]);
   FFPHTTPClient.AddHeader('Accept', '*/*');
-  FFPHTTPClient.AddHeader('Content-Type', 'application/json');
   FFPHTTPClient.AddHeader('User-Agent', Format('GrafanaLokiLogger v%s', [GrafanaLokiLoggerVersion]));
   SetHeaders;
 
   // REQUEST
   try
-    Body.Position := 0;
-    FFPHTTPClient.RequestBody := Body;
-    lContent := FFPHTTPClient.Post(lURL);
+    lContent := FFPHTTPClient.Get(Self.URL);
   except
     on E: Exception do
     begin
@@ -126,24 +124,26 @@ begin
       if (E is ESocketError) then
         lExceptionKind := TGrafanaLokiLoggerException.RequestHttp;
 
-      raise EGrafanaLokiLogger.Build(lExceptionKind)
-        .Title('Request Execute fail')
-        .Msg(E.Message)
-        .Hint('Check the error message.')
-        .Detail(GetDetail(E));
+      if not (E is EHTTPClient) then
+        raise EGrafanaLokiLogger.Build(lExceptionKind)
+          .Title('Request fail')
+          .Msg(E.Message)
+          .Hint('Check the error message.')
+          .Detail(GetDetail(E));
     end;
   end;
 
   // VALIDATION
-  lHTTPResponse := THTTPResponse.Create(lContent, FFPHTTPClient.ResponseStatusCode, lURL, Self.BodyJSON);
+  lHTTPResponse := THTTPResponseBuildinfo.Create(FFPHTTPClient, lContent, Self.URL);
   try
     lHTTPResponse.Process;
+    FBuildinfo := lHTTPResponse.Buildinfo;
   finally
     lHTTPResponse.Free;
   end;
 end;
 
-procedure THTTPRequest.SetHeaders;
+procedure THTTPRequestBuildinfo.SetHeaders;
 var
   lHeader: TPair<string, string>;
 begin
@@ -159,21 +159,47 @@ begin
 end;
 {$ENDREGION}
 
-{$REGION 'THTTPResponse'}
-constructor THTTPResponse.Create(const pContent: string; const pStatusCode: Integer; const pURL: string; const pBody: string);
+{$REGION 'THTTPResponseBuildinfo'}
+constructor THTTPResponseBuildinfo.Create(const pFPHTTPClient: TFPHTTPClient; const pContent: string; const pURL: string);
 begin
-  inherited Create(pURL, pBody);
-  FStatusCode := pStatusCode;
-  FContent := pContent
+  FFPHTTPClient := pFPHTTPClient;
+  FContent := pContent;
+  FURL := pURL;
 end;
 
-procedure THTTPResponse.Process;
+procedure THTTPResponseBuildinfo.Process;
 begin
-  if (Trim(FContent) = EmptyStr) then
+  if not Assigned(FFPHTTPClient) then
     Exit;
 
-  if (FStatusCode = 400) then
-    RequestInvalid(FContent);
+  FStatusCode := FFPHTTPClient.ResponseStatusCode;
+  FStatusText := FFPHTTPClient.ResponseStatusText;
+
+  case FStatusCode of
+    200:
+    begin
+      if (Trim(FContent) = EmptyStr) then
+        raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
+          .Title('Response processing')
+          .Msg('Response is empty.')
+          .Hint('Check the error message.')
+          .Detail(EmptyStr);
+
+      FBuildinfo := TGrafanaLokiLoggerBuildinfo.Create(FContent);
+    end;
+    404:
+    begin
+      raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
+        .Title('Request fail')
+        .Msg('Server does not support this request.')
+        .Hint('Check the error message.')
+        .Detail(EmptyStr);
+    end;
+  else
+  begin
+    inherited;
+  end;
+  end;
 end;
 {$ENDREGION}
 

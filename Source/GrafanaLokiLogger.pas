@@ -33,6 +33,7 @@ uses
 type
   TGrafanaLokiLoggerLevel = GrafanaLokiLogger.Types.TGrafanaLokiLoggerLevel;
   EGrafanaLokiLogger = GrafanaLokiLogger.Classes.EGrafanaLokiLogger;
+  IGrafanaLokiLoggerBuildinfo = GrafanaLokiLogger.Interfaces.IGrafanaLokiLoggerBuildinfo;
 
   TGrafanaLokiLogger = class(GrafanaLokiLogger.Core.TGrafanaLokiLogger)
   private

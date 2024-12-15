@@ -345,7 +345,10 @@ end;
 function TGrafanaLokiLoggerSettings.URL(const pValue: string): IGrafanaLokiLoggerSettings;
 begin
   Result := Self;
+
   FURL := Trim(pValue);
+  if not FURL.EndsWith('/') then
+    FURL := Format('%s/', [FURL]);
 end;
 
 function TGrafanaLokiLoggerSettings.URL: string;

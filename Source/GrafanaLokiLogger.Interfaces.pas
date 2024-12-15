@@ -42,12 +42,14 @@ type
   IGrafanaLokiLoggerSettings = interface;
   IGrafanaLokiLoggerLabels = interface;
   IGrafanaLokiLoggerLogs = interface;
+  IGrafanaLokiLoggerBuildinfo = interface;
 
   IGrafanaLokiLogger = interface
     function GetSettings: IGrafanaLokiLoggerSettings;
     function GetLabels: IGrafanaLokiLoggerLabels;
     function GetLogs: IGrafanaLokiLoggerLogs;
     function GetVersion: string;
+    function Buildinfo: IGrafanaLokiLoggerBuildinfo;
     procedure Push;
 
     property Settings: IGrafanaLokiLoggerSettings read GetSettings;
@@ -124,6 +126,17 @@ type
     function Lines: TArray<TPair<TGrafanaLokiLoggerLevel, IGrafanaLokiLoggerLog>>; overload;
     procedure Validate;
     function &End: IGrafanaLokiLogger;
+  end;
+
+  IGrafanaLokiLoggerBuildinfo = interface
+    ['{B86D9A52-2921-4EF1-BCE5-6AD1D9B59DC3}']
+    function Version: string;
+    function Revision: string;
+    function Branch: string;
+    function BuildUser: string;
+    function BuildDate: TDateTime;
+    function GoVersion: string;
+    function ToString: string;
   end;
 
 implementation

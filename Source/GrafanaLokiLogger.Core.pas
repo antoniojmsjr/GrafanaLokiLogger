@@ -47,6 +47,7 @@ type
     function GetLogs: IGrafanaLokiLoggerLogs;
     function GetVersion: string;
     function GetPayload(const pJSON: string): TStream;
+    function Buildinfo: IGrafanaLokiLoggerBuildinfo;
     procedure Push;
   protected
     { protected declarations }
@@ -59,17 +60,16 @@ implementation
 
 uses
   {$IF DEFINED(FPC)}
-  SysUtils, GrafanaLokiLogger.HTTP.Lazarus,
+  SysUtils, GrafanaLokiLogger.HTTP.Lazarus.Push, GrafanaLokiLogger.HTTP.Lazarus.Buildinfo,
   {$ELSE}
-  System.SysUtils, GrafanaLokiLogger.HTTP.Delphi,
+  System.SysUtils, GrafanaLokiLogger.HTTP.Delphi.Push, GrafanaLokiLogger.HTTP.Delphi.Buildinfo,
   {$ENDIF}
-  GrafanaLokiLogger.Core.Validation, GrafanaLokiLogger.Core.Parse,
+  GrafanaLokiLogger.Consts, GrafanaLokiLogger.Core.Validation, GrafanaLokiLogger.Core.Parse,
   GrafanaLokiLogger.Types, GrafanaLokiLogger.Utils, GrafanaLokiLogger.Classes;
 
 {$I GrafanaLokiLogger.inc}
 
-{ TGrafanaLokiLogger }
-
+{$REGION 'TGrafanaLokiLogger'}
 constructor TGrafanaLokiLogger.Create;
 begin
   FSettings := TGrafanaLokiLoggerSettings.Create(Self);
@@ -108,7 +108,7 @@ begin
         on E: Exception do
         begin
           raise EGrafanaLokiLogger.Build(TGrafanaLokiLoggerException.RequestInvalid)
-            .Title('Request Execute fail')
+            .Title('Request fail')
             .Msg(E.Message)
             .Hint('Check the error message.');
         end;
@@ -121,17 +121,57 @@ begin
   end;
 end;
 
+function TGrafanaLokiLogger.Buildinfo: IGrafanaLokiLoggerBuildinfo;
+var
+  lHTTPRequest: THTTPRequestBuildinfo;
+  lValidator: TGrafanaLokiLoggerValidatorBuildinfo;
+begin
+  Result := nil;
+
+  // VALIDATION
+  lValidator := TGrafanaLokiLoggerValidatorBuildinfo.Create;
+  try
+    lValidator.Validate(Self.FSettings);
+  finally
+    lValidator.Free;
+  end;
+
+  // REQUEST
+  lHTTPRequest := THTTPRequestBuildinfo.Create;
+  try
+    lHTTPRequest.URL := Format('%s%s', [Self.FSettings.URL, C_LOKI_API_ENDPOINT_BUILDINFO]);
+    lHTTPRequest.Timeout := Self.FSettings.Timeout;
+    lHTTPRequest.Keepalive := Self.FSettings.Keepalive;
+    lHTTPRequest.Proxy.Server := Self.FSettings.Proxy.Server;
+    lHTTPRequest.Proxy.Port := Self.FSettings.Proxy.Port;
+    lHTTPRequest.Proxy.User := Self.FSettings.Proxy.User;
+    lHTTPRequest.Proxy.Password := Self.FSettings.Proxy.Password;
+
+    if (Self.FSettings.Authentication.Basic <> EmptyStr) then
+      lHTTPRequest.Headers.Add('Authorization', Format('Basic %s', [Self.FSettings.Authentication.Basic]));
+
+    if (Self.FSettings.Authentication.Bearer <> EmptyStr) then
+      lHTTPRequest.Headers.Add('Authorization', Format('Bearer %s', [Self.FSettings.Authentication.Bearer]));
+
+    lHTTPRequest.Execute;
+
+    Result := lHTTPRequest.Buildinfo;
+  finally
+    lHTTPRequest.Free;
+  end;
+end;
+
 procedure TGrafanaLokiLogger.Push;
 var
   lBody: TStream;
   lParseStreams: TParseStreams;
   lParseStreamsJSON: string;
-  lHTTPRequest: THTTPRequest;
-  lValidator: TGrafanaLokiLoggerValidator;
+  lHTTPRequest: THTTPRequestPush;
+  lValidator: TGrafanaLokiLoggerValidatorPush;
 begin
 
   // VALIDATION
-  lValidator := TGrafanaLokiLoggerValidator.Create;
+  lValidator := TGrafanaLokiLoggerValidatorPush.Create;
   try
     lValidator.Validate(Self.FSettings, Self.FLabels, Self.FLogs);
   finally
@@ -151,9 +191,9 @@ begin
   try
     lBody := GetPayload(lParseStreamsJSON);
 
-    lHTTPRequest := THTTPRequest.Create;
+    lHTTPRequest := THTTPRequestPush.Create;
     try
-      lHTTPRequest.URL := Self.FSettings.URL;
+      lHTTPRequest.URL := Format('%s%s', [Self.FSettings.URL, C_LOKI_API_ENDPOINT_PUSH]);
       lHTTPRequest.Timeout := Self.FSettings.Timeout;
       lHTTPRequest.Keepalive := Self.FSettings.Keepalive;
       lHTTPRequest.Compression := Self.FSettings.Compression;
@@ -191,5 +231,6 @@ begin
     lBody.Free;
   end;
 end;
+{$ENDREGION}
 
 end.

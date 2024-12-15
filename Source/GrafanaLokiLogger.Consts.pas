@@ -28,6 +28,7 @@ interface
 
 const
   C_LOKI_API_ENDPOINT_PUSH = 'loki/api/v1/push';
+  C_LOKI_API_ENDPOINT_BUILDINFO = 'loki/api/v1/status/buildinfo';
 
 implementation
 

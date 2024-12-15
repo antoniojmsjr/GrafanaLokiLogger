@@ -6,7 +6,7 @@ uses
   GrafanaLokiLogger.Interfaces;
 
 type
-  TGrafanaLokiLoggerValidator = class
+  TGrafanaLokiLoggerValidatorPush = class
   private
     { private declarations }
   protected
@@ -16,18 +16,35 @@ type
     procedure Validate(pSettings: IGrafanaLokiLoggerSettings; pLabels: IGrafanaLokiLoggerLabels; pLogs: IGrafanaLokiLoggerLogs);
   end;
 
+  TGrafanaLokiLoggerValidatorBuildinfo = class
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+  public
+    { public declarations }
+    procedure Validate(pSettings: IGrafanaLokiLoggerSettings);
+  end;
+
 implementation
 
 uses
   GrafanaLokiLogger.Core.Labels, GrafanaLokiLogger.Core.Logs,
   GrafanaLokiLogger.Core.Settings;
 
-{$REGION 'TGrafanaLokiLoggerValidator'}
-procedure TGrafanaLokiLoggerValidator.Validate(pSettings: IGrafanaLokiLoggerSettings; pLabels: IGrafanaLokiLoggerLabels; pLogs: IGrafanaLokiLoggerLogs);
+{$REGION 'TGrafanaLokiLoggerValidatorPush'}
+procedure TGrafanaLokiLoggerValidatorPush.Validate(pSettings: IGrafanaLokiLoggerSettings; pLabels: IGrafanaLokiLoggerLabels; pLogs: IGrafanaLokiLoggerLogs);
 begin
   pSettings.Validate;
   pLabels.Validate;
   pLogs.Validate;
+end;
+{$ENDREGION}
+
+{$REGION 'TGrafanaLokiLoggerValidatorPush'}
+procedure TGrafanaLokiLoggerValidatorBuildinfo.Validate(pSettings: IGrafanaLokiLoggerSettings);
+begin
+  pSettings.Validate;
 end;
 {$ENDREGION}
 
