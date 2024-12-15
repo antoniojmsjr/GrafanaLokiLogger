@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 319
+  Left = 248
   Height = 532
-  Top = 163
+  Top = 183
   Width = 1550
   Caption = 'GrafanaLokiLogger - App Desktop'
   ClientHeight = 532
@@ -1810,7 +1810,7 @@ object frmMain: TfrmMain
           Top = 7
           Width = 365
           TabOrder = 0
-          Text = 'http://127.0.0.1:3100'
+          Text = 'http://localhost:3100'
           TextHint = 'Enter a valid URL!'
         end
         object edtSettingsTimeout: TSpinEdit
@@ -2337,7 +2337,7 @@ object frmMain: TfrmMain
         Left = 1377
         Height = 144
         Top = 3
-        Width = 163
+        Width = 60
         Align = alClient
         BorderSpacing.Left = 3
         BorderSpacing.Top = 3
@@ -2347,6 +2347,21 @@ object frmMain: TfrmMain
         OnClick = btnPushLogsClick
         ParentFont = False
         TabOrder = 8
+      end
+      object btnBuildinfo: TBitBtn
+        Left = 1440
+        Height = 144
+        Top = 3
+        Width = 100
+        Align = alRight
+        BorderSpacing.Left = 3
+        BorderSpacing.Top = 3
+        BorderSpacing.Bottom = 3
+        Caption = 'Buildinfo'
+        Font.Style = [fsBold]
+        OnClick = btnBuildinfoClick
+        ParentFont = False
+        TabOrder = 9
       end
     end
     object gbxErrors: TGroupBox

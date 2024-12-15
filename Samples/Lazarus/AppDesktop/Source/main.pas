@@ -58,6 +58,7 @@ type
 
   TfrmMain = class(TForm)
     btnPushLogs: TBitBtn;
+    btnBuildinfo: TBitBtn;
     bvlPush: TBevel;
     bvlTotal: TBevel;
     ckbSettingsCompression: TCheckBox;
@@ -101,6 +102,7 @@ type
     pnlHeader: TPanel;
     lblHeaderAppGithub: TStaticText;
     PopupMenu1: TPopupMenu;
+    procedure btnBuildinfoClick(Sender: TObject);
     procedure btnPushLogsClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure AmountChange(Sender: TObject);
@@ -229,7 +231,7 @@ begin
       on E: Exception do
       begin
         if E is EGrafanaLokiLogger then
-          FMessage := Format('Level: %s - Error: %s - %s', [FLevel.AsString, EGrafanaLokiLogger(E).ToString, E.QualifiedClassName])
+          FMessage := Format('%s', [EGrafanaLokiLogger(E).ToString])
         else
           FMessage := Format('Level: %s - Error: %s - %s', [FLevel.AsString, E.Message, E.QualifiedClassName]);
         Synchronize(DoLog);
@@ -277,6 +279,35 @@ begin
   btnPushLogs.Font.Size := 12;
 
   TThread.ExecuteInThread(PushLogExecute, PushLogExecuteTerminate);
+end;
+
+procedure TfrmMain.btnBuildinfoClick(Sender: TObject);
+var
+  lBuildinfo: IGrafanaLokiLoggerBuildinfo;
+begin
+  try
+    lBuildinfo := TGrafanaLokiLogger.Build
+      .Settings
+        .Reset
+        .URL(edtSettingsURL.Text)
+        .Timeout(edtSettingsTimeout.Value)
+        .Compression(ckbSettingsCompression.Checked)
+        .Authentication
+          .Basic(edtSettingsBasicAuthUser.Text, edtSettingsBasicAuthPassword.Text)
+      .&End
+      .Buildinfo;
+
+    if Assigned(lBuildinfo) then
+      Application.MessageBox(PChar(lBuildinfo.ToString), 'I N F O', MB_OK + MB_ICONINFORMATION);
+  except
+    on E: Exception do
+    begin
+      if E is EGrafanaLokiLogger then
+        Application.MessageBox(PChar(Format('%s', [EGrafanaLokiLogger(E).ToString])), 'E R R O R', MB_OK + MB_ICONERROR)
+      else
+        Application.MessageBox(PChar(Format('Error: %s - %s', [E.Message, E.QualifiedClassName])), 'E R R O R', MB_OK + MB_ICONERROR)
+    end;
+  end;
 end;
 
 procedure TfrmMain.AmountChange(Sender: TObject);
