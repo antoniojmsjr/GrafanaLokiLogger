@@ -95,7 +95,7 @@ uses
   {$IF DEFINED(FPC)}
   Generics.Defaults, Windows, SysUtils,
   {$ELSE}
-  System.Generics.Defaults, Winapi.Windows, System.SysUtils,
+  System.Generics.Defaults, System.SysUtils,
   {$ENDIF}
   GrafanaLokiLogger.Classes;
 
